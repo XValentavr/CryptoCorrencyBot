@@ -30,9 +30,10 @@ if __name__ == "__main__":
         GetCommand.create_get_command(message, crypto)
 
 
-    @crypto.callback_query_handler(func=lambda message: True)
-    def touch_handler(message):
-        Commands.callback_worker(message, crypto)
+    @crypto.callback_query_handler(func=lambda call: True)
+    def touch_handler(call):
+        Commands.callback_worker(call, crypto)
+        GetCommand.callback_worker(call, crypto)
 
 
     crypto.polling(none_stop=True, interval=0)
