@@ -19,8 +19,9 @@ def create_get_command(message, bot):
         try:
             crypto = message.text
             open_, price, low, close_ = Crypto.pritty_currency(crypto, bot, message)
-            currency = f'*Сurrent {crypto} rate*\nOpen price is *{open_}* USD\nhigh price is *{price}* USD\nlow price is' \
-                       f' *{low}* USD\nclose price is *{close_}* USD'
+            currency = f'*Сurrent {crypto.upper()} rate*\nCurrent price is *{close_}* USD\nOpen price is *{open_}* USD\n' \
+                       f'high price is *{price}* USD\nlow price is ' \
+                       f'*{low}* USD'
             bot.send_message(message.chat.id, currency, parse_mode='Markdown')
         except TypeError:
             StartAndReset.create_main_buttons(message, bot)
@@ -30,8 +31,9 @@ def callback_worker(call, bot):
     try:
         crypto = call.data
         open_, price, low, close_ = Crypto.pritty_currency(crypto, bot, call)
-        currency = f'*Сurrent {crypto} rate*\nOpen price is *{open_}* USD\nhigh price is *{price}* USD\nlow price is ' \
-                   f'*{low}* USD\nclose price is *{close_}* USD'
+        currency = f'*Сurrent {crypto.upper()} rate*\n\nCurrent price is *{close_}* USD\n\nOpen price is *{open_}* USD\n\n' \
+                   f'high price is *{price}* USD\n\nlow price is ' \
+                   f'*{low}* USD'
         bot.send_message(call.message.chat.id, currency, parse_mode='Markdown')
     except TypeError:
         StartAndReset.create_main_buttons(call, bot)
